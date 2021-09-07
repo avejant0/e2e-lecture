@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "Configs (Root)",
+      "path": "."
+    },
+    {
+      "name": "Server",
+      "path": "server"
+    },
+    {
+      "name": "Client",
+      "path": "client"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/server": true
+    }
+  }
+}
