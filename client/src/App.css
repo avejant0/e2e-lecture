@@ -28,11 +28,18 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.TodoList-container {
+  padding: 50px;
+  border: white solid 1px;
+  color: black;
+  background-color:rgb(190, 190, 190);
+}
+
+.TodoItem-container {
+  display: flex;
+  direction: row;
+}
+
+.TodoItem-container > label {
+  flex-grow: 1;
 }

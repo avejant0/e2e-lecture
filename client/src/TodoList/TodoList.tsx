@@ -31,6 +31,16 @@ function TodoList() {
     setNewTodoText('');
   };
 
+  const handleTodoUpdate = (todoId: string, newContent: string) => {
+    const targetIndex = todos.findIndex((todo) => todo.id === todoId);
+    if (targetIndex !== -1) {
+      todos[targetIndex].content = newContent;
+      setTodos([...todos]);
+    }
+
+  };
+
+
   const handleTodoRemove = (todoId: string) => {
     const targetIndex = todos.findIndex((todo) => todo.id === todoId);
     if (targetIndex !== -1) {
@@ -54,12 +64,13 @@ function TodoList() {
                 isDone={isDone} 
                 handleChange={handleChange}
                 handleRemove={handleTodoRemove}
+                handleEdit={handleTodoUpdate}
               />
             );
           })
         }
 
-        <FormGroup>
+        <FormGroup row={true}>
           <TextField id="outlined-basic" variant="outlined" onChange={handleInputChange} value={newTodoText}/>
           <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>  
         </FormGroup> 

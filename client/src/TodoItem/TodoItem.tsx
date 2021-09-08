@@ -1,30 +1,65 @@
 import React, { ChangeEvent } from "react";
-import { Button, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from "@material-ui/core";
 
 type TodoItemProps = {
   id: string;
   content: string;
   isDone: boolean;
   handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  handleEdit: Function;
   handleRemove: Function;
 };
 
+type Mode = 'edit' | 'view';
+
 function TodoItem(props: TodoItemProps) {
-  const { id, content, isDone, handleChange, handleRemove } = props;
+  const { id, content, isDone, handleChange, handleEdit, handleRemove } = props;
+  const [mode, setMode] = React.useState<Mode>('view');
+  const [editedText, setEditedText] = React.useState('');
+
+  const isEditMode = () => mode === 'edit';
+
+  const switchToEdit = () => {
+    setMode('edit');
+    setEditedText(props.content);
+  }
+
+  const handleInputChange = (event: any) => {
+    setEditedText(event.target.value);
+  };
+
+  const saveEdited = () => {
+    if (editedText !== '') {
+      handleEdit(id, editedText);
+    }
+
+    setMode('view');
+    setEditedText('');
+  };
+
   return(
-    <FormGroup row={true}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={isDone}
-            onChange={handleChange}
-            value={id}
-            color="primary"
+    <FormGroup row={true} className="TodoItem-container">
+      {!isEditMode() &&
+        <>
+          <FormControlLabel
+            control={
+            <Checkbox
+              checked={isDone}
+              onChange={handleChange}
+              value={id}
+              color="primary"
+            />
+            }
+            label={content}
           />
-        }
-        label={content}
-      />
-      <Button color="primary">Edit</Button>
+          <Button color="primary" onClick={switchToEdit}>Edit</Button>
+        </>
+      }
+      {isEditMode() && 
+        <>
+          <TextField value={editedText} onChange={handleInputChange}/>
+          <Button color="primary" onClick={saveEdited}>Save</Button> 
+        </> }
       <Button color="secondary" onClick={() => handleRemove(id)}>Remove</Button>
     </FormGroup>
   );
