@@ -38,7 +38,7 @@ function TodoItem(props: TodoItemProps) {
   };
 
   return(
-    <FormGroup row={true} className="TodoItem-container">
+    <FormGroup row={true} className="TodoItem-container" data-cy="todo-item">
       {!isEditMode() &&
         <>
           <FormControlLabel

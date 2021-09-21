@@ -11,6 +11,10 @@
     {
       "name": "Client",
       "path": "client"
+    },
+    {
+      "name": "E2E",
+      "path": "e2e"
     }
   ],
   "settings": {
