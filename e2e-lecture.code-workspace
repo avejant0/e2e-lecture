@@ -6,7 +6,7 @@
     },
     {
       "name": "Server",
-      "path": "server"
+      "path": "api"
     },
     {
       "name": "Client",
@@ -22,7 +22,8 @@
       "**/.git": true,
       "**/node_modules": true,
       "**/dist": true,
-      "**/server": true
+      "**/api": true,
+      "**/client": true
     }
   }
 }
