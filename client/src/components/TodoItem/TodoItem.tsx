@@ -1,11 +1,11 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from "@material-ui/core";
 
 type TodoItemProps = {
   id: string;
   content: string;
   isDone: boolean;
-  handleChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  handleChange: Function;
   handleEdit: Function;
   handleRemove: Function;
 };
@@ -45,7 +45,7 @@ function TodoItem(props: TodoItemProps) {
             control={
             <Checkbox
               checked={isDone}
-              onChange={handleChange}
+              onChange={() => handleChange(id)}
               value={id}
               color="primary"
             />

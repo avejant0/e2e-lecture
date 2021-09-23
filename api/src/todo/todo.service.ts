@@ -50,7 +50,6 @@ export class TodoService {
 
   delete(id: string) {
     const todo = this.todos.find((todo) => todo.id === id);
-    console.log(id);
 
     if (!todo) {
       return null;
