@@ -1,17 +1,20 @@
 import {v4 as uuidv4} from 'uuid';
-import { Injectable } from "@nestjs/common";
-import { CreateTodoDto, GetTodoDto, UpdateTodoDto } from "./dto";
-import Todo from "./todo.model";
+import { Injectable } from '@nestjs/common';
+import { CreateTodoDto, GetTodoDto, UpdateTodoDto } from './dto';
+import Todo from './todo.model';
+import { TodoRepository } from './todo.repository';
 
 @Injectable()
 export class TodoService {
   private todos: Todo[] = [
-    { id: '26fbc2ba-f877-48c9-8201-4bccc1dc6318', content: "Feed cat", isDone: false },
-    { id: '4c90b854-9a15-405d-ab68-70505ed068b5', content: "Brush teeth", isDone: true }
+    { id: '26fbc2ba-f877-48c9-8201-4bccc1dc6318', content: 'Feed cat', isDone: false },
+    { id: '4c90b854-9a15-405d-ab68-70505ed068b5', content: 'Brush teeth', isDone: true }
   ];
 
-  getAll(): GetTodoDto[] {
-    return this.todos;
+  constructor(private todoRepository: TodoRepository) {}
+
+  async getAll(): Promise<GetTodoDto[]> {
+    return this.todoRepository.findAll();
   }
 
   getById(id: string): GetTodoDto | null {
@@ -24,9 +27,9 @@ export class TodoService {
     return todo;
   }
 
-  create(todoToCreate: CreateTodoDto): GetTodoDto {
+  async create(todoToCreate: CreateTodoDto): Promise<GetTodoDto> {
     const todoModel: Todo = { id: uuidv4(), content: todoToCreate.content, isDone: false };
-    this.todos.push(todoModel);
+    await this.todoRepository.create(todoModel);
     return todoModel;
   }
 
@@ -57,6 +60,6 @@ export class TodoService {
 
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
-    return "";
+    return '';
   }
 }
