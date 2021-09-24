@@ -6,25 +6,14 @@ import { TodoRepository } from './todo.repository';
 
 @Injectable()
 export class TodoService {
-  private todos: Todo[] = [
-    { id: '26fbc2ba-f877-48c9-8201-4bccc1dc6318', content: 'Feed cat', isDone: false },
-    { id: '4c90b854-9a15-405d-ab68-70505ed068b5', content: 'Brush teeth', isDone: true }
-  ];
-
   constructor(private todoRepository: TodoRepository) {}
 
   async getAll(): Promise<GetTodoDto[]> {
     return this.todoRepository.findAll();
   }
 
-  getById(id: string): GetTodoDto | null {
-    const todo = this.todos.find((todo) => todo.id === id);
-
-    if (!todo) {
-      return null;
-    }
-
-    return todo;
+  async getById(id: string): Promise<GetTodoDto | null> {
+    return this.todoRepository.findById(id);
   }
 
   async create(todoToCreate: CreateTodoDto): Promise<GetTodoDto> {
@@ -33,33 +22,25 @@ export class TodoService {
     return todoModel;
   }
 
-  update(id: string, todoToUpdate: UpdateTodoDto): GetTodoDto | null {
-    const todoIndex = this.todos.findIndex((todo) => todo.id === id);
+  async update(id: string, todoToUpdate: UpdateTodoDto): Promise<GetTodoDto | null> {
+    const todo: Todo = await this.todoRepository.findById(id);
 
-    if (todoIndex === -1) {
-      return null;
+    if (todo === null) {
+      return todo;
     }
 
     if (todoToUpdate.content) {
-      this.todos[todoIndex].content = todoToUpdate.content;
+      todo.content = todoToUpdate.content;
     }
 
     if (todoToUpdate.isDone !== undefined) {
-      this.todos[todoIndex].isDone = todoToUpdate.isDone;
-    }
+      todo.isDone = todoToUpdate.isDone;
+    }   
 
-    return this.todos[todoIndex];
+    return this.todoRepository.update(id, todo);
   }
 
-  delete(id: string) {
-    const todo = this.todos.find((todo) => todo.id === id);
-
-    if (!todo) {
-      return null;
-    }
-
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-
-    return '';
+  async delete(id: string): Promise<undefined | null> {
+    return this.todoRepository.delete(id);
   }
 }

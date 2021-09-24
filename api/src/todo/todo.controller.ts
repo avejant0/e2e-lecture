@@ -13,8 +13,8 @@ export class TodoController {
 
   @Get(':id')
   async getById(@Param('id') id: string): Promise<GetTodoDto> {
-    const todo = this.todoService.getById(id);
-    
+    const todo = await this.todoService.getById(id);
+  
     if (todo === null) {
       throw new NotFoundException();
     }
@@ -39,13 +39,13 @@ export class TodoController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<string | null> {
-    const result = this.todoService.delete(id);
+  async delete(@Param('id') id: string): Promise<any | null> {
+    const result = await this.todoService.delete(id);
 
     if (result === null) {
       throw new NotFoundException();
     }
 
-    return result;
+    return { success: true};
   }
 }

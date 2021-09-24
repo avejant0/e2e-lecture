@@ -27,6 +27,55 @@ export class TodoRepository {
     return todo;
   }
 
+  public async findById(id: string): Promise<Todo | null> {
+    if (this.db === null) {
+      await this.init();
+    }
+
+    const todos = await this.db.get(this.collectionName).value();
+    const todo = todos.find((todo) => todo.id === id);
+
+    if (!todo) {
+      return null;
+    }
+
+    return todo;
+  }
+
+  public async update(id: string, updatedTodo: Todo): Promise<Todo> {
+    if (this.db === null) {
+      await this.init();
+    }
+
+    const todos = await this.db.get(this.collectionName).value();
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    todos[todoIndex] = updatedTodo;
+    
+    await this.db.set(this.collectionName, todos).write();
+
+    return updatedTodo;
+  }
+
+  public async delete(id: string): Promise<undefined | null>  {
+    if (this.db === null) {
+      await this.init();
+    }
+
+    const todos = await this.db.get(this.collectionName).value();
+
+    const todo = todos.find((todo) => todo.id === id);
+
+    if (!todo) {
+      return null;
+    }
+
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+
+    await this.db.set(this.collectionName, updatedTodos).write();
+
+    return;
+  }
+
   private async init(): Promise<void> {
     const adapter = new FileAsync('./src/db/db.json');
     this.db = await lowdb(adapter);
