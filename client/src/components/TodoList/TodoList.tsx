@@ -28,39 +28,52 @@ function TodoList() {
   };
 
   const handleTodoUpdate = async (todoId: string, newContent: string) => {
-    await todoStore.updateTodo(todoId, { content: newContent});
+    await todoStore.updateTodo(todoId, { content: newContent });
   };
 
   const handleTodoRemove = async (todoId: string) => {
     await todoStore.removeTodo(todoId);
-  }; 
+  };
 
   const handleInputChange = (event: any) => {
     setNewTodoText(event.target.value);
   };
 
+  const handleOnKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+      handleAddTodo();
+    }
+  };
+
   return (
     <FormGroup>
-        {
-           todoStore.todos.map(({id, content, isDone}: TodoModel) => {
-            return (
-              <TodoItem 
-                key={id}
-                id={id} 
-                content={content} 
-                isDone={isDone} 
-                handleChange={handleChange}
-                handleRemove={handleTodoRemove}
-                handleEdit={handleTodoUpdate}
-              />
-            );
-          })
-        }
+      {
+        todoStore.todos.map(({ id, content, isDone }: TodoModel) => {
+          return (
+            <TodoItem
+              key={id}
+              id={id}
+              content={content}
+              isDone={isDone}
+              handleChange={handleChange}
+              handleRemove={handleTodoRemove}
+              handleEdit={handleTodoUpdate}
+            />
+          );
+        })
+      }
 
-        <FormGroup row={true}>
-          <TextField id="outlined-basic" className="TodoList-TextField" variant="outlined" onChange={handleInputChange} value={newTodoText}/>
-          <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>  
-        </FormGroup> 
+      <FormGroup row={true}>
+        <TextField
+          id="outlined-basic"
+          className="TodoList-TextField"
+          variant="outlined" 
+          onChange={handleInputChange}
+          onKeyDown={handleOnKeyDown}
+          value={newTodoText} 
+        />
+        <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>
+      </FormGroup>
     </FormGroup>
   );
 }
