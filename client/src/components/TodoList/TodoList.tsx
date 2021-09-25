@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite"
 
-import { Button, FormGroup, TextField } from "@material-ui/core";
+import { Button, CircularProgress, FormGroup, TextField } from "@material-ui/core";
 import TodoItem from "../TodoItem/TodoItem";
 
 import todoStore from "../../stores/Todo.store";
@@ -48,7 +48,9 @@ function TodoList() {
   return (
     <FormGroup>
       {
-        todoStore.todos.map(({ id, content, isDone }: TodoModel) => {
+        todoStore.processing 
+        ? <CircularProgress className="TodoList-spinner"/> 
+        : todoStore.todos.map(({ id, content, isDone }: TodoModel) => {
           return (
             <TodoItem
               key={id}
@@ -66,13 +68,20 @@ function TodoList() {
       <FormGroup row={true}>
         <TextField
           id="outlined-basic"
-          className="TodoList-TextField"
+          className="TodoList-textField"
           variant="outlined" 
           onChange={handleInputChange}
           onKeyDown={handleOnKeyDown}
+          disabled={todoStore.processing}
           value={newTodoText} 
         />
-        <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>
+        <Button 
+          variant="contained" 
+          onClick={handleAddTodo} 
+          disabled={todoStore.processing}
+        >
+          Add Todo
+        </Button>
       </FormGroup>
     </FormGroup>
   );

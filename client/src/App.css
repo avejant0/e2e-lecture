@@ -44,6 +44,11 @@
   flex-grow: 1;
 }
 
-.TodoList-TextField {
+.TodoList-textField {
   flex-grow: 1;
+}
+
+.TodoList-spinner {
+  align-self: center;
+  margin: 20px 0;
 }
