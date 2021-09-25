@@ -75,6 +75,14 @@ export class TodoRepository {
 
     return;
   }
+  
+  public async clearAll() {
+    if (this.db === null) {
+      await this.init();
+    }
+
+    await this.db.set(this.collectionName, []).write();    
+  }
 
   private async init(): Promise<void> {
     const adapter = new FileAsync('./src/db/db.json');

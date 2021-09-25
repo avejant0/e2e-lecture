@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } 
 import { TodoService } from "./todo.service";
 import { CreateTodoDto, GetTodoDto, UpdateTodoDto } from "./dto";
 
-@Controller('todos')
+@Controller('/api/todos')
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
