@@ -58,7 +58,7 @@ function TodoList() {
         }
 
         <FormGroup row={true}>
-          <TextField id="outlined-basic" variant="outlined" onChange={handleInputChange} value={newTodoText}/>
+          <TextField id="outlined-basic" className="TodoList-TextField" variant="outlined" onChange={handleInputChange} value={newTodoText}/>
           <Button variant="contained" onClick={handleAddTodo}>Add Todo</Button>  
         </FormGroup> 
     </FormGroup>

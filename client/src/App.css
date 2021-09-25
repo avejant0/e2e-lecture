@@ -43,3 +43,7 @@
 .TodoItem-container > label {
   flex-grow: 1;
 }
+
+.TodoList-TextField {
+  flex-grow: 1;
+}
