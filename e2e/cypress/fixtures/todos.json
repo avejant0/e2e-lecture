@@ -1,0 +1,17 @@
+[
+    {
+        "id": "a4378ba5-b26a-4700-a77c-a2ceffd1e625",
+        "content": "Go to fitness",
+        "isDone": false
+    },
+    {
+        "id": "ee1743ae-f960-45be-8150-3e3975b31afa",
+        "content": "Feed the cat",
+        "isDone": true
+    },
+    {
+        "id": "ee1743ae-f960-45be-8150-3e3975b31af1",
+        "content": "Solve task on Leetcode",
+        "isDone": true
+    }
+]
