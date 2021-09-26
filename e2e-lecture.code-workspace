@@ -13,8 +13,12 @@
       "path": "client"
     },
     {
-      "name": "E2E",
+      "name": "E2E cypress",
       "path": "e2e"
+    },
+    {
+      "name": "E2E selenium",
+      "path": "e2e-selenium"
     }
   ],
   "settings": {

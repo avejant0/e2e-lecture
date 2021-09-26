@@ -76,7 +76,7 @@ export class TodoRepository {
     return;
   }
   
-  public async clearAll() {
+  public async clearAll(): Promise<void> {
     if (this.db === null) {
       await this.init();
     }

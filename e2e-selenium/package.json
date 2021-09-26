@@ -1,0 +1,20 @@
+{
+  "name": "e2e-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "chromedriver": "^91.0.0",
+    "jest": "^27.2.2",
+    "selenium-webdriver": "3.x"
+  },
+  "scripts": {
+    "test": "jest --config jest.json"
+  },
+  "author": "",
+  "license": "ISC"
+}
