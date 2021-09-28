@@ -14,7 +14,7 @@
     },
     {
       "name": "E2E cypress",
-      "path": "e2e"
+      "path": "e2e-cypress"
     },
     {
       "name": "E2E selenium",
