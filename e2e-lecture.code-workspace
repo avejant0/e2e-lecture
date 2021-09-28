@@ -19,6 +19,10 @@
     {
       "name": "E2E selenium",
       "path": "e2e-selenium"
+    },
+    {
+      "name": "E2E Cucumber",
+      "path": "e2e-cucumber"
     }
   ],
   "settings": {
