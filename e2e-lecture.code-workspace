@@ -32,6 +32,8 @@
       "**/dist": true,
       "**/api": true,
       "**/client": true
-    }
+    },
+    "cucumberautocomplete.steps": ["./e2e-cucumber/cypress/integration/**/*.js"]  
+  
   }
 }
