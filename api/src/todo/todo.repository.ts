@@ -10,27 +10,24 @@ export class TodoRepository {
   private db: lowdb.LowdbAsync<any> = null;
  
   public async findAll(): Promise<Todo[]> {
-    if (this.db === null) {
-      await this.init();
-    }
+    await this.init();
+
     const todos = await this.db.get(this.collectionName).value();
     return todos;
   }
 
   public async create(todo: Todo): Promise<Todo> {
-    if (this.db === null) {
-      await this.init();
-    }
+    await this.init();
+
     const todos = await this.db.get(this.collectionName).value();
+    console.log(todos);
     todos.push(todo);
     await this.db.set(this.collectionName, todos).write();
     return todo;
   }
 
   public async findById(id: string): Promise<Todo | null> {
-    if (this.db === null) {
-      await this.init();
-    }
+    await this.init();
 
     const todos = await this.db.get(this.collectionName).value();
     const todo = todos.find((todo) => todo.id === id);
@@ -43,9 +40,7 @@ export class TodoRepository {
   }
 
   public async update(id: string, updatedTodo: Todo): Promise<Todo> {
-    if (this.db === null) {
-      await this.init();
-    }
+    await this.init();
 
     const todos = await this.db.get(this.collectionName).value();
     const todoIndex = todos.findIndex((todo) => todo.id === id);
@@ -57,10 +52,7 @@ export class TodoRepository {
   }
 
   public async delete(id: string): Promise<undefined | null>  {
-    if (this.db === null) {
-      await this.init();
-    }
-
+    await this.init();
     const todos = await this.db.get(this.collectionName).value();
 
     const todo = todos.find((todo) => todo.id === id);
@@ -77,10 +69,7 @@ export class TodoRepository {
   }
   
   public async clearAll(): Promise<void> {
-    if (this.db === null) {
-      await this.init();
-    }
-
+    await this.init();
     await this.db.set(this.collectionName, []).write();    
   }
 

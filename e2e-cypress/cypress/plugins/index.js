@@ -16,7 +16,21 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
+const { outputJson } = require('fs-extra');
+
+function seed(data) {
+  console.log(__dirname);
+  return outputJson(`${__dirname}/../../../db/db.test.json`, data);
+}
+
 module.exports = (on, config) => {
+  on('task', {
+    'seed:db' (data) {
+      return seed(data).then(() => {
+        return data;
+      });
+    },
+  })
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 }
