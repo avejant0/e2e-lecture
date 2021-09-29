@@ -85,7 +85,7 @@ export class TodoRepository {
   }
 
   private async init(): Promise<void> {
-    const adapter = new FileAsync('./src/db/db.json');
+    const adapter = new FileAsync('../db/db.json');
     this.db = await lowdb(adapter);
     const todos = await this.db.get(this.collectionName).value();
     if (!todos) {
