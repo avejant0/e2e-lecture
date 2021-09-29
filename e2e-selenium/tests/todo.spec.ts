@@ -2,10 +2,14 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
 import TodoPage from '../pages/TodoPage';
 describe('Todo Test', () => {
   let todoPage: TodoPage;
- 
+  let driver;
   beforeAll(async () => {
-    const driver = new Builder().forBrowser('chrome').build();
+    driver = new Builder().forBrowser('chrome').build();
     todoPage = new TodoPage(driver);
+  });
+
+  afterAll(async () => {
+    await driver.quit();
   });
 
   it('should show correct count of todo items', async () => {
