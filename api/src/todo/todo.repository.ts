@@ -85,12 +85,21 @@ export class TodoRepository {
   }
 
   private async init(): Promise<void> {
-    const adapter = new FileAsync('../db/db.json');
+    const adapter = new FileAsync(this.getDbPath());
     this.db = await lowdb(adapter);
     const todos = await this.db.get(this.collectionName).value();
     if (!todos) {
       await this.db.set(this.collectionName, []).write();
     }
+  }
+
+  private getDbPath() {
+    const mainPath = '../db';
+    if (process.env.NODE_ENV === "test") {
+      return `${mainPath}/db.test.json`;
+    }
+
+    return `${mainPath}/db.json`;
   }
 
 }
