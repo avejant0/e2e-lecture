@@ -4,7 +4,9 @@
 https://docs.google.com/presentation/d/1_AlipQYOFGtnmZRqVCbZf-04sXOInbbD4goyyezX7ZY
 
 ## Requirements:
-- Node 14+
+- Node 14+;
+- Yarn;
+- Chrome Webdriver executable for Windows;
 
 ## How to run:
 ### Application:
